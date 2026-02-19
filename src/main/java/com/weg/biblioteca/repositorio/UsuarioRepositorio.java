@@ -58,4 +58,30 @@ public class UsuarioRepositorio {
         }
         return usuarios;
     }
+
+    public Usuario procuraUsuarioPorId(long id)throws SQLException{
+        String sql = """
+                SELECT
+                id,
+                nome,
+                email
+                FROM
+                usuario
+                WHERE
+                id = ?
+                """;
+        try (Connection conn = Conexao.conectar();
+        PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()){
+                long identidade = rs.getLong("id");
+                String nome = rs.getString("nome");
+                String email = rs.getString("email");
+                Usuario usuario = new Usuario(identidade, nome, email);
+                return usuario;
+            }
+            return null;
+        }
+    }
 }

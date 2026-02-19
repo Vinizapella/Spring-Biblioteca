@@ -37,4 +37,15 @@ public class UsuarioController {
         }
     }
 
+    @GetMapping("/{id}")
+    public Usuario mostraUsuarioPorId(
+            @PathVariable long id
+    ){
+        try {
+            return usuarioService.listaUsuarioPorId(id);
+        }catch (SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
 }

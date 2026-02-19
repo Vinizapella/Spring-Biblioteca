@@ -32,4 +32,12 @@ public class UsuarioService {
         }
     }
 
+    public Usuario listaUsuarioPorId(long id)throws SQLException{
+        try {
+            return usuarioRepositorio.procuraUsuarioPorId(id);
+        }catch (SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
 }
