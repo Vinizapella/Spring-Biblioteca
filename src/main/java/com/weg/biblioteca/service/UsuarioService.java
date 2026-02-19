@@ -46,4 +46,11 @@ public class UsuarioService {
         return usuario;
     }
 
+    public void deletarusuario(long id)throws SQLException{
+        try {
+            usuarioRepositorio.deletarUsuariop(id);
+        }catch (SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 }

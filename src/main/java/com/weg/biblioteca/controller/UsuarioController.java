@@ -60,4 +60,14 @@ public class UsuarioController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public void deletarUsuario(
+            @PathVariable long id
+    ){
+        try {
+            usuarioService.deletarusuario(id);
+        }catch (SQLException e ){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 }

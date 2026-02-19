@@ -103,4 +103,19 @@ public class UsuarioRepositorio {
             stmt.executeUpdate();
         }
     }
+
+    public void deletarUsuariop(long id)throws SQLException{
+        String sql = """
+                DELETE
+                FROM
+                usuario
+                WHERE
+                id = ?
+                """;
+        try (Connection conn = Conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setLong(1, id);
+            stmt.executeUpdate();
+        }
+    }
 }
