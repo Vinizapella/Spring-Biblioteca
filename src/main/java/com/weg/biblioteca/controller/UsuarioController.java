@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/{usuario}")
+@RequestMapping("/usuario")
 public class UsuarioController {
 
     private UsuarioService usuarioService;
