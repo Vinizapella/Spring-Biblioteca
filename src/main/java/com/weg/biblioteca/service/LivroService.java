@@ -5,6 +5,7 @@ import com.weg.biblioteca.repositorio.LivroRepositorio;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Service
 public class LivroService {
@@ -17,6 +18,10 @@ public class LivroService {
 
     public Livro salvarLivro(Livro livro)throws SQLException{
         return livroRepositorio.cadastrarLivro(livro);
+    }
+
+    public List<Livro> retornarLivro()throws SQLException{
+        return livroRepositorio.livros();
     }
 
 }

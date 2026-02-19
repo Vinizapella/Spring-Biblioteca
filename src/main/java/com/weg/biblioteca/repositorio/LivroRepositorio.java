@@ -5,6 +5,8 @@ import com.weg.biblioteca.utils.Conexao;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class LivroRepositorio {
@@ -35,6 +37,32 @@ public class LivroRepositorio {
             }
         }
         return null;
+    }
+
+    public List<Livro>livros()throws SQLException{
+        String sql = """
+                SELECT 
+                id,
+                titulo,
+                autor,
+                ano_publicacao
+                FROM
+                livro
+                """;
+        List<Livro>livros = new ArrayList<>();
+        try (Connection conn = Conexao.conectar();
+        PreparedStatement stmt = conn.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                long id = rs.getLong("id");
+                String titulo = rs.getString("titulo");
+                String autor = rs.getString("autor");
+                int ano_publicacao = rs.getInt("ano_publicacao");
+                Livro livro = new Livro(id, titulo, autor, ano_publicacao);
+                livros.add(livro);
+            }
+        }
+        return livros;
     }
 
 }

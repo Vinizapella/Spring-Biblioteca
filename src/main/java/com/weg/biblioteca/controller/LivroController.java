@@ -5,6 +5,7 @@ import com.weg.biblioteca.service.LivroService;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/livro")
@@ -21,6 +22,15 @@ public class LivroController {
              @RequestBody Livro livro)throws SQLException{
         try {
             return livroService.salvarLivro(livro);
+        }catch (SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    @GetMapping
+    public List<Livro> listaLivro()throws SQLException{
+        try {
+            return livroService.retornarLivro();
         }catch (SQLException e){
             throw new RuntimeException(e.getMessage());
         }
