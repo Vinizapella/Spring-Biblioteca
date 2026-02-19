@@ -37,4 +37,15 @@ public class EmprestimoController {
         }
     }
 
+    @GetMapping("/{id}")
+    public Emprestimo buscaEmprestimo(
+            @PathVariable long id
+    ){
+        try {
+            return emprestimoService.buscaId(id);
+        }catch (SQLException e){
+            throw  new RuntimeException(e.getMessage());
+        }
+    }
+
 }

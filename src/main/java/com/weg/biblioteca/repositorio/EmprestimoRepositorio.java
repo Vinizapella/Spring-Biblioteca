@@ -66,4 +66,34 @@ public class EmprestimoRepositorio {
         return emprestimos;
     }
 
+    public Emprestimo buscaEmprestimo(long id)throws SQLException{
+        String sql = """
+                SELECT
+                id, 
+                livro_id,
+                usuario_id,
+                data_emprestimo,
+                data_devolucao
+                FROM
+                emprestimo
+                WHERE
+                id = ?
+                """;
+        try (Connection conn = Conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()){
+                long identidade = rs.getLong("id");
+                long idLivro = rs.getLong("livro_id");
+                long idUsuario = rs.getLong("usuario_id");
+                Date data_emprestimo = rs.getDate("data_emprestimo");
+                Date devolucao = rs.getDate("data_devolucao");
+                Emprestimo emprestimo = new Emprestimo(identidade, idLivro, idUsuario, data_emprestimo, devolucao);
+                return emprestimo;
+            }
+        }
+        return null;
+    }
+
 }

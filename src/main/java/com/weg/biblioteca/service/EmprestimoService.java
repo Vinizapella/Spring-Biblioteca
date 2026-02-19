@@ -24,4 +24,8 @@ public class EmprestimoService {
         return emprestimoRepositorio.emprestimos();
     }
 
+    public Emprestimo buscaId(long id)throws SQLException{
+        return emprestimoRepositorio.buscaEmprestimo(id);
+    }
+
 }
