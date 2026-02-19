@@ -48,4 +48,16 @@ public class EmprestimoController {
         }
     }
 
+    @PutMapping("/{id}")
+    public Emprestimo atualiza(
+            @PathVariable long id,
+            @RequestBody Emprestimo emprestimo
+    ){
+        try {
+            return emprestimoService.atualizaEmprestimo(emprestimo, id);
+        }catch (SQLException e ){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
 }

@@ -96,4 +96,27 @@ public class EmprestimoRepositorio {
         return null;
     }
 
+    public void atualizaEmprestimo(Emprestimo emprestimo)throws SQLException{
+        String sql = """
+                UPDATE
+                emprestimo
+                SET
+                livro_id = ?,
+                usuario_id = ?,
+                data_emprestimo = ?,
+                data_devolucao = ?
+                WHERE
+                id = ?
+                """;
+        try (Connection conn = Conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setLong(1, emprestimo.getLivro_id());
+            stmt.setLong(2, emprestimo.getUsuario_id());
+            stmt.setObject(3, emprestimo.getData_emprestimo());
+            stmt.setObject(4, emprestimo.getData_devolucao());
+            stmt.setLong(5, emprestimo.getId());
+            stmt.executeUpdate();
+        }
+    }
+
 }
