@@ -60,4 +60,14 @@ public class EmprestimoController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public void delete(
+            @PathVariable long id
+    ){
+        try {
+            emprestimoService.delete(id);
+        }catch (SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 }

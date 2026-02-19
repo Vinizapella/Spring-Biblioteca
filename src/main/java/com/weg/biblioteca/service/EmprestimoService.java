@@ -34,4 +34,8 @@ public class EmprestimoService {
         return emprestimo;
     }
 
+    public void delete(long id)throws SQLException{
+        emprestimoRepositorio.delete(id);
+    }
+
 }

@@ -119,4 +119,19 @@ public class EmprestimoRepositorio {
         }
     }
 
+    public void delete(long id)throws SQLException{
+        String sql = """
+                DELETE
+                FROM
+                emprestimo
+                WHERE
+                id = ?
+                """;
+        try (Connection conn = Conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setLong(1, id);
+            stmt.executeUpdate();
+        }
+    }
+
 }
