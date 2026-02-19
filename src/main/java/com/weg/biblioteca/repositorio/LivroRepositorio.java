@@ -93,4 +93,25 @@ public class LivroRepositorio {
         }
     }
 
+    public void atualizaLivro(Livro livro)throws SQLException{
+        String sql = """
+                UPDATE
+                livro
+                SET
+                titulo = ?,
+                autor = ?,
+                ano_publicacao = ?
+                WHERE
+                id = ?
+                """;
+        try (Connection conn = Conexao.conectar();
+        PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setString(1, livro.getTitulo());
+            stmt.setString(2, livro.getAutor());
+            stmt.setInt(3, livro.getAno_publicacao());
+            stmt.setLong(4, livro.getId());
+            stmt.executeUpdate();
+        }
+    }
+
 }

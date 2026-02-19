@@ -47,4 +47,16 @@ public class LivroController {
         }
     }
 
+    @PutMapping("/{id}")
+    public Livro atualizaLivro(
+            @PathVariable long id,
+            @RequestBody Livro livro
+    ){
+        try {
+            return livro = livroService.atualizarLivro(livro, id);
+        }catch (SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
 }

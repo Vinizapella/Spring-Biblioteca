@@ -28,4 +28,10 @@ public class LivroService {
         return livroRepositorio.procuraPorId(id);
     }
 
+    public Livro atualizarLivro(Livro livro, long id)throws SQLException{
+        livro.setId(id);
+        livroRepositorio.atualizaLivro(livro);
+        return livro;
+    }
+
 }
