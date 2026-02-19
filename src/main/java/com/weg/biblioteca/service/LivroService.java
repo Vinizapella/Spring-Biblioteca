@@ -34,4 +34,12 @@ public class LivroService {
         return livro;
     }
 
+    public void deletarLivro(long id)throws SQLException{
+        try {
+            livroRepositorio.deletarLivro(id);
+        }catch (SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
 }

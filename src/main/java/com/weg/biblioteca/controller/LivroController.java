@@ -59,4 +59,15 @@ public class LivroController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public void deletarlivro(
+            @PathVariable long id
+    ){
+        try {
+            livroService.deletarLivro(id);
+        }catch (SQLException e ){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
 }

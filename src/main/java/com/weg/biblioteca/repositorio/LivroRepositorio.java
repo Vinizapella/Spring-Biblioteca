@@ -114,4 +114,19 @@ public class LivroRepositorio {
         }
     }
 
+    public void deletarLivro(long id)throws SQLException{
+        String sql = """
+                DELETE
+                FROM
+                livro
+                WHERE
+                id = ?
+                """;
+        try (Connection conn = Conexao.conectar();
+        PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setLong(1, id);
+            stmt.executeUpdate();
+        }
+    }
+
 }
