@@ -5,6 +5,7 @@ import com.weg.biblioteca.repositorio.EmprestimoRepositorio;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Service
 public class EmprestimoService {
@@ -17,6 +18,10 @@ public class EmprestimoService {
 
     public Emprestimo salvaEmprestimo(Emprestimo emprestimo)throws SQLException{
         return emprestimoRepositorio.salvarEmprestimo(emprestimo);
+    }
+
+    public List<Emprestimo>emprestimos()throws SQLException{
+        return emprestimoRepositorio.emprestimos();
     }
 
 }

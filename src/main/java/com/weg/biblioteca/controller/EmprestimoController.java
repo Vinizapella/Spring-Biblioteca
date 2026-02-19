@@ -3,12 +3,10 @@ package com.weg.biblioteca.controller;
 
 import com.weg.biblioteca.model.Emprestimo;
 import com.weg.biblioteca.service.EmprestimoService;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @RequestMapping("/emprestimo")
 @RestController
@@ -25,6 +23,15 @@ public class EmprestimoController {
             @RequestBody  Emprestimo emprestimo){
         try {
             return emprestimoService.salvaEmprestimo(emprestimo);
+        }catch (SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    @GetMapping
+    public List<Emprestimo> listaEmprestimos(){
+        try {
+            return emprestimoService.emprestimos();
         }catch (SQLException e){
             throw new RuntimeException(e.getMessage());
         }
