@@ -65,4 +65,32 @@ public class LivroRepositorio {
         return livros;
     }
 
+    public Livro procuraPorId(long id)throws SQLException{
+        String sql = """
+                SELECT
+                id,
+                titulo,
+                autor,
+                ano_publicacao
+                FROM
+                livro
+                WHERE
+                id = ?
+                """;
+        try (Connection conn = Conexao.conectar();
+        PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()){
+                long identidade = rs.getLong("id");
+                String titulo = rs.getString("titulo");
+                String autor = rs.getString("autor");
+                int ano_publicacao = rs.getInt("ano_publicacao");
+                Livro livro = new Livro(identidade, titulo, autor, ano_publicacao);
+                return livro;
+            }
+            return null;
+        }
+    }
+
 }

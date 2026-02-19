@@ -24,4 +24,8 @@ public class LivroService {
         return livroRepositorio.livros();
     }
 
+    public Livro retornarPorId(long id)throws SQLException{
+        return livroRepositorio.procuraPorId(id);
+    }
+
 }

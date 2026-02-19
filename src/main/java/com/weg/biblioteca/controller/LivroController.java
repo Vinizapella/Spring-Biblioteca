@@ -19,7 +19,7 @@ public class LivroController {
 
     @PostMapping
     public Livro salvaLivro(
-             @RequestBody Livro livro)throws SQLException{
+             @RequestBody Livro livro){
         try {
             return livroService.salvarLivro(livro);
         }catch (SQLException e){
@@ -28,9 +28,20 @@ public class LivroController {
     }
 
     @GetMapping
-    public List<Livro> listaLivro()throws SQLException{
+    public List<Livro> listaLivro(){
         try {
             return livroService.retornarLivro();
+        }catch (SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    @GetMapping("/{id}")
+    public Livro procuraLivroPorId(
+            @PathVariable long id
+    ){
+        try {
+            return livroService.retornarPorId(id);
         }catch (SQLException e){
             throw new RuntimeException(e.getMessage());
         }
