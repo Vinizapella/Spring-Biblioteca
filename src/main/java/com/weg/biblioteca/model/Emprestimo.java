@@ -60,7 +60,7 @@ public class Emprestimo {
         this.data_emprestimo = data_emprestimo;
     }
 
-    public Date getData_devolucao() {
+    public java.sql.Date getData_devolucao() {
         return data_devolucao;
     }
 

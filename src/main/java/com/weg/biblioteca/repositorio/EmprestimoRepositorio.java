@@ -134,4 +134,45 @@ public class EmprestimoRepositorio {
         }
     }
 
+    public boolean emprestimoUsuario(long id)throws SQLException {
+        String sql = """
+                SELECT
+                COUNT(*)
+                AS
+                total
+                FROM
+                emprestimo
+                WHERE
+                livro_id = ?
+                AND
+                data_devolucao IS NULL
+                """;
+        try (Connection conn = Conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()){
+                return rs.getLong("total")>0;
+            }
+        }
+        return false;
+    }
+
+    public void salvaDevolucao(long id, Date data_devolucao)throws SQLException{
+        String sql = """
+                UPDATE 
+                emprestimo
+                SET
+                data_devolucao = ?
+                WHERE
+                id = ?
+                """;
+        try (Connection conn = Conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setDate(1, (java.sql.Date) data_devolucao);
+            stmt.setLong(2, id);
+            stmt.executeUpdate();
+        }
+    }
+
 }

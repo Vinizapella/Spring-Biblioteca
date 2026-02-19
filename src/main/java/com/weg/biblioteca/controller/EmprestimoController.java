@@ -70,4 +70,16 @@ public class EmprestimoController {
             throw new RuntimeException(e.getMessage());
         }
     }
+
+    @PutMapping("/{id}/devolucao")
+    public void devolucao(
+            @PathVariable long id,
+            @RequestBody Emprestimo emprestimo
+    ){
+        try {
+            emprestimoService.devolucao(id, emprestimo.getData_devolucao());
+        }catch (SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 }
