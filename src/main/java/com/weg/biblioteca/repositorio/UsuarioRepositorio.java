@@ -84,4 +84,23 @@ public class UsuarioRepositorio {
             return null;
         }
     }
+
+    public void atualizaUsuario(Usuario usuario)throws SQLException{
+        String sql = """
+                UPDATE
+                usuario
+                SET 
+                nome = ?,
+                email = ?
+                WHERE
+                id = ?
+                """;
+        try (Connection conn = Conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setString(1, usuario.getNome());
+            stmt.setString(2, usuario.getEmail());
+            stmt.setLong(3, usuario.getId());
+            stmt.executeUpdate();
+        }
+    }
 }

@@ -40,4 +40,10 @@ public class UsuarioService {
         }
     }
 
+    public Usuario atualizaUsuario(Usuario usuario, long id)throws SQLException{
+        usuario.setId(id);
+        usuarioRepositorio.atualizaUsuario(usuario);
+        return usuario;
+    }
+
 }

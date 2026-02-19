@@ -48,4 +48,16 @@ public class UsuarioController {
         }
     }
 
+    @PutMapping("/{id}")
+    public Usuario atualizarUsuario(
+            @PathVariable long id,
+            @RequestBody Usuario usuario
+    ){
+        try {
+            return usuarioService.atualizaUsuario(usuario, id);
+        }catch (SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
 }
