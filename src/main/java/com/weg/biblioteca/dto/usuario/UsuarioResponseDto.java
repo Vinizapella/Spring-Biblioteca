@@ -1,4 +1,8 @@
 package com.weg.biblioteca.dto.usuario;
 
-public class UsuarioResponseDto {
+public record UsuarioResponseDto(
+        long id,
+        String nome,
+        String email
+) {
 }

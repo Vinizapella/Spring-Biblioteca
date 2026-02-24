@@ -1,6 +1,8 @@
 package com.weg.biblioteca.controller;
 
 
+import com.weg.biblioteca.dto.usuario.UsuarioRequestDto;
+import com.weg.biblioteca.dto.usuario.UsuarioResponseDto;
 import com.weg.biblioteca.model.Usuario;
 import com.weg.biblioteca.service.UsuarioService;
 import org.springframework.web.bind.annotation.*;
@@ -19,10 +21,11 @@ public class UsuarioController {
     }
 
     @PutMapping
-    public Usuario criaUsuario(
-            @RequestBody Usuario usuario){
+    public UsuarioResponseDto criaUsuario(
+            @RequestBody UsuarioRequestDto usuarioRequestDto
+    ){
         try {
-            return usuarioService.salvarUsuario(usuario);
+            return usuarioService.salvarUsuario(usuarioRequestDto);
         }catch (SQLException e ){
             throw new RuntimeException(e.getMessage());
         }

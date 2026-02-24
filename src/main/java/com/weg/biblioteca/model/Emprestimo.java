@@ -61,7 +61,7 @@ public class Emprestimo {
     }
 
     public java.sql.Date getData_devolucao() {
-        return data_devolucao;
+        return (java.sql.Date) data_devolucao;
     }
 
     public void setData_devolucao(Date data_devolucao) {
