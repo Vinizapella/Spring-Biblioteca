@@ -32,7 +32,7 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public List<Usuario> mostraUsuarios(){
+    public List<UsuarioResponseDto> mostraUsuarios(){
         try {
             return usuarioService.usuarios();
         }catch (SQLException e){
@@ -41,7 +41,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public Usuario mostraUsuarioPorId(
+    public UsuarioResponseDto mostraUsuarioPorId(
             @PathVariable long id
     ){
         try {
@@ -52,12 +52,12 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public Usuario atualizarUsuario(
+    public UsuarioResponseDto atualizarUsuario(
             @PathVariable long id,
-            @RequestBody Usuario usuario
+            @RequestBody UsuarioRequestDto usuarioRequestDto
     ){
         try {
-            return usuarioService.atualizaUsuario(usuario, id);
+            return usuarioService.atualizaUsuario(usuarioRequestDto, id);
         }catch (SQLException e){
             throw new RuntimeException(e.getMessage());
         }

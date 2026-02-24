@@ -8,6 +8,7 @@ import com.weg.biblioteca.repositorio.UsuarioRepositorio;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,26 +35,35 @@ public class UsuarioService {
         }
     }
 
-    public List<Usuario>usuarios()throws SQLException{
+    public List<UsuarioResponseDto>usuarios()throws SQLException{
         try {
-            return usuarioRepositorio.usuarios();
+            List<Usuario> usuariosDoBanco = usuarioRepositorio.usuarios();
+            List<UsuarioResponseDto> listaDto = new ArrayList<>();
+            for(Usuario u : usuariosDoBanco){
+                UsuarioResponseDto dto = usuarioMapper.toResponse(u);
+                listaDto.add(dto);
+            }
+            return listaDto;
         }catch (SQLException e){
             throw new RuntimeException(e.getMessage());
         }
     }
 
-    public Usuario listaUsuarioPorId(long id)throws SQLException{
+    public UsuarioResponseDto listaUsuarioPorId(long id)throws SQLException{
         try {
-            return usuarioRepositorio.procuraUsuarioPorId(id);
+            Usuario usuarioEntity = usuarioRepositorio.procuraUsuarioPorId(id);
+            UsuarioResponseDto dto = usuarioMapper.toResponse(usuarioEntity);
+            return dto;
         }catch (SQLException e){
             throw new RuntimeException(e.getMessage());
         }
     }
 
-    public Usuario atualizaUsuario(Usuario usuario, long id)throws SQLException{
+    public UsuarioResponseDto atualizaUsuario(UsuarioRequestDto usuarioRequestDto, long id)throws SQLException{
+        Usuario usuario = usuarioMapper.toEntity(usuarioRequestDto);
         usuario.setId(id);
         usuarioRepositorio.atualizaUsuario(usuario);
-        return usuario;
+        return usuarioMapper.toResponse(usuario);
     }
 
     public void deletarusuario(long id)throws SQLException{
