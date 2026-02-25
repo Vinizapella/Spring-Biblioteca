@@ -1,4 +1,8 @@
 package com.weg.biblioteca.dto.livro;
 
-public class LivroRequestDto {
+public record LivroRequestDto (
+        String titulo,
+        String autor,
+        int ano_publicacao
+){
 }

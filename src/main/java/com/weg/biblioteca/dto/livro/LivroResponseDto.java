@@ -1,4 +1,9 @@
 package com.weg.biblioteca.dto.livro;
 
-public class LivroResponseDto {
+public record LivroResponseDto (
+        long id,
+        String titulo,
+        String autor,
+        int ano_publicacao
+){
 }

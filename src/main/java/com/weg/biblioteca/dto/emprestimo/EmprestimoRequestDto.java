@@ -1,4 +1,12 @@
 package com.weg.biblioteca.dto.emprestimo;
 
-public class EmprestimoRequestDto {
+import java.util.Date;
+
+public record EmprestimoRequestDto (
+        long id,
+        long livro_id,
+        long usuario_id,
+        Date data_emprestimo,
+        Date data_devolucao
+){
 }
