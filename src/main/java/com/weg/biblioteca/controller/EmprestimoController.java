@@ -1,6 +1,8 @@
 package com.weg.biblioteca.controller;
 
 
+import com.weg.biblioteca.dto.emprestimo.EmprestimoRequestDto;
+import com.weg.biblioteca.dto.emprestimo.EmprestimoResponseDto;
 import com.weg.biblioteca.model.Emprestimo;
 import com.weg.biblioteca.service.EmprestimoService;
 import org.springframework.web.bind.annotation.*;
@@ -19,17 +21,17 @@ public class EmprestimoController {
     }
 
     @PutMapping
-    public Emprestimo adicionaEmprestimo(
-            @RequestBody  Emprestimo emprestimo){
+    public EmprestimoResponseDto adicionaEmprestimo(
+            @RequestBody EmprestimoRequestDto emprestimoRequestDto){
         try {
-            return emprestimoService.salvaEmprestimo(emprestimo);
+            return emprestimoService.salvaEmprestimo(emprestimoRequestDto);
         }catch (SQLException e){
             throw new RuntimeException(e.getMessage());
         }
     }
 
     @GetMapping
-    public List<Emprestimo> listaEmprestimos(){
+    public List<EmprestimoResponseDto> listaEmprestimos(){
         try {
             return emprestimoService.emprestimos();
         }catch (SQLException e){
@@ -38,7 +40,7 @@ public class EmprestimoController {
     }
 
     @GetMapping("/{id}")
-    public Emprestimo buscaEmprestimo(
+    public EmprestimoResponseDto buscaEmprestimo(
             @PathVariable long id
     ){
         try {
@@ -49,12 +51,12 @@ public class EmprestimoController {
     }
 
     @PutMapping("/{id}")
-    public Emprestimo atualiza(
+    public EmprestimoResponseDto atualiza(
             @PathVariable long id,
-            @RequestBody Emprestimo emprestimo
+            @RequestBody EmprestimoRequestDto emprestimoRequestDto
     ){
         try {
-            return emprestimoService.atualizaEmprestimo(emprestimo, id);
+            return emprestimoService.atualizaEmprestimo(emprestimoRequestDto, id);
         }catch (SQLException e ){
             throw new RuntimeException(e.getMessage());
         }
