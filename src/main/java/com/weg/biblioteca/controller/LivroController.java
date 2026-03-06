@@ -4,6 +4,7 @@ import com.weg.biblioteca.dto.livro.LivroRequestDto;
 import com.weg.biblioteca.dto.livro.LivroResponseDto;
 import com.weg.biblioteca.model.Livro;
 import com.weg.biblioteca.service.LivroService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -21,7 +22,7 @@ public class LivroController {
 
     @PostMapping
     public LivroResponseDto salvaLivro(
-            @RequestBody LivroRequestDto livroRequestDto){
+            @Valid @RequestBody LivroRequestDto livroRequestDto){
         try {
             return livroService.salvarLivro(livroRequestDto);
         }catch (SQLException e){
@@ -52,7 +53,7 @@ public class LivroController {
     @PutMapping("/{id}")
     public LivroResponseDto atualizaLivro(
             @PathVariable long id,
-            @RequestBody LivroRequestDto livroRequestDto
+            @Valid @RequestBody LivroRequestDto livroRequestDto
     ){
         try {
             return livroService.atualizarLivro(livroRequestDto, id);
